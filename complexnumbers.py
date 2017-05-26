@@ -1,6 +1,7 @@
-import math;
+import math
+from copy import deepcopy
 
-class Number:
+class Real:
 
 	type = "real";
 	
@@ -26,7 +27,7 @@ class Number:
 		print "The original type is: " + self.type;
 		
 		
-class ComplexNumber(Number):
+class Complex:
 
 	type = "complex";
 	def __init__ (self, real, imaginary):
@@ -93,6 +94,30 @@ class ComplexNumber(Number):
 		print "The type is: " + self.type;
 		super;
 
+	def __CheckOtherIsValid(self, other):
+		if not isinstance(other, Complex):
+			raise Exception('Other value must be a complex number')
 
+	def __add__(self, other):
+		self.__CheckOtherIsValid(other)
+		result = deepcopy(self)
+		result.Add(other)
+		return result
 
+	def __sub__(self, other):
+		self.__CheckOtherIsValid(other)
+		result = deepcopy(self)
+		result.Subtract(other)
+		return result
 
+	def __mul__(self, other):
+		self.__CheckOtherIsValid(other)
+		result = deepcopy(self)
+		result.Multiply(other)
+		return result
+
+	def __div__(self, other):
+		self.__CheckOtherIsValid(other)
+		result = deepcopy(self)
+		result.Divide(other)
+		return result
